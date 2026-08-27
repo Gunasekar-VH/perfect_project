@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="layout">
+  <aside class="sidebar">
+    <a class="active" href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('admin.books') }}">Books</a>
+    <a href="{{ url_for('admin.add_book') }}">Add Book</a>
+    <a href="{{ url_for('admin.borrowed_books') }}">Borrowed</a>
+    <a href="{{ url_for('admin.users') }}">Users</a>
+    <a href="{{ url_for('admin.reports') }}">Reports</a>
+  </aside>
+  <section class="content-area">
+    <div class="section-head">
+      <h2>Admin Dashboard</h2>
+      <div class="nav-stack">
+        <a class="btn secondary" href="{{ url_for('admin.add_book') }}">Add Book</a>
+        <a class="btn secondary" href="{{ url_for('admin.reports') }}">View Reports</a>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="card stat"><span>Total books</span><strong>{{ total_books }}</strong></div>
+      <div class="card stat"><span>Available copies</span><strong>{{ available_books }}</strong></div>
+      <div class="card stat"><span>Borrowed</span><strong>{{ borrowed_books }}</strong></div>
+      <div class="card stat"><span>Overdue</span><strong>{{ overdue_books }}</strong></div>
+    </div>
+    <div class="details-grid section">
+      <div class="card">
+        <h3>Recent books</h3>
+        {% for book in recent_books %}
+        <div class="detail-item"><span>{{ book.title }}</span><span class="muted">{{ book.category }}</span></div>
+        {% else %}<p class="empty">No books yet.</p>{% endfor %}
+      </div>
+      <div class="card">
+        <h3>Recent loans</h3>
+        {% for borrowing in recent_loans %}
+        <div class="detail-item">
+          <span>{{ borrowing.book.title }}</span>
+          <span class="status {{ status_for_borrowing(borrowing)|lower }}">{{ status_for_borrowing(borrowing) }}</span>
+        </div>
+        {% else %}<p class="empty">No borrowing records yet.</p>{% endfor %}
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

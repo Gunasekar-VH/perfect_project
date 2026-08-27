@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="layout">
+  <aside class="sidebar">
+    <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('admin.books') }}">Books</a>
+    <a href="{{ url_for('admin.add_book') }}">Add Book</a>
+    <a href="{{ url_for('admin.borrowed_books') }}">Borrowed</a>
+    <a class="active" href="{{ url_for('admin.users') }}">Users</a>
+    <a href="{{ url_for('admin.reports') }}">Reports</a>
+  </aside>
+  <section class="content-area">
+    <div class="section-head">
+      <h2>Users</h2>
+    </div>
+    <div class="table">
+      <div class="table-head">
+        <div>ID</div><div>Name</div><div>Username</div><div>Email</div><div>Joined</div><div>Role</div>
+      </div>
+      {% for user in users %}
+      <div class="row">
+        <div>{{ user.id }}</div>
+        <div>{{ user.name }}</div>
+        <div>{{ user.username }}</div>
+        <div>{{ user.email }}</div>
+        <div>{{ user.created_at.strftime('%Y-%m-%d') }}</div>
+        <div><span class="status available">{{ user.role|title }}</span></div>
+      </div>
+      {% else %}
+      <p class="empty">No users found.</p>
+      {% endfor %}
+    </div>
+    {% if pagination.pages > 1 %}
+    <div class="pagination">
+      {% if pagination.has_prev %}<a class="page-link" href="{{ url_for('admin.users', page=pagination.prev_num) }}">Prev</a>{% endif %}
+      <span class="current">Page {{ pagination.page }} of {{ pagination.pages }}</span>
+      {% if pagination.has_next %}<a class="page-link" href="{{ url_for('admin.users', page=pagination.next_num) }}">Next</a>{% endif %}
+    </div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

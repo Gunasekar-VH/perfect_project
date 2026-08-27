@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="layout">
+  <aside class="sidebar">
+    <a class="active" href="{{ url_for('user.dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('user.books') }}">Books</a>
+    <a href="{{ url_for('user.borrowed_books') }}">Borrowed</a>
+    <a href="{{ url_for('user.profile') }}">Profile</a>
+  </aside>
+  <section class="content-area">
+    <div class="section-head">
+      <h2>Welcome, {{ user.name }}</h2>
+      <a class="btn secondary" href="{{ url_for('user.books') }}">Browse books</a>
+    </div>
+    <div class="stats">
+      <div class="card stat"><span>Borrowed now</span><strong>{{ borrowed_count }}</strong></div>
+      <div class="card stat"><span>Overdue</span><strong>{{ overdue_count }}</strong></div>
+      <div class="card stat"><span>Account</span><strong>{{ user.username }}</strong></div>
+    </div>
+    <div class="section card">
+      <h3>Recent activity</h3>
+      {% for borrowing in recent_borrowings %}
+      <div class="detail-item">
+        <span>{{ borrowing.book.title }}</span>
+        <span class="status {{ status_for_borrowing(borrowing)|lower }}">{{ status_for_borrowing(borrowing) }}</span>
+      </div>
+      {% else %}
+      <p class="empty">No borrowing history yet.</p>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}

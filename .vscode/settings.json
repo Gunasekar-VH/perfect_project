@@ -1,0 +1,5 @@
+{
+  "livePreview.defaultPreviewPath": "/",
+  "python.defaultInterpreterPath": "python",
+  "terminal.integrated.defaultProfile.windows": "Command Prompt"
+}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="layout">
+  <aside class="sidebar">
+    <a href="{{ url_for('user.dashboard') }}">Dashboard</a>
+    <a class="active" href="{{ url_for('user.books') }}">Books</a>
+    <a href="{{ url_for('user.borrowed_books') }}">Borrowed</a>
+    <a href="{{ url_for('user.profile') }}">Profile</a>
+  </aside>
+  <section class="content-area">
+    <div class="section-head">
+      <h2>Books</h2>
+      <form method="get" class="searchbar">
+        <input name="q" value="{{ request.args.get('q', '') }}" placeholder="Search by title, author, category, ISBN">
+        <button class="btn secondary" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="table">
+      <div class="table-head">
+        <div>Title</div><div>Author</div><div>Category</div><div>ISBN</div><div>Status</div><div>Action</div>
+      </div>
+      {% for book in books %}
+      <div class="row">
+        <div><a href="{{ url_for('user.book_detail', book_id=book.id) }}">{{ book.title }}</a></div>
+        <div>{{ book.author }}</div>
+        <div>{{ book.category }}</div>
+        <div>{{ book.isbn }}</div>
+        <div>
+          {% if book.available_quantity > 0 %}
+          <span class="status available">Available</span>
+          {% else %}
+          <span class="status unavailable">Unavailable</span>
+          {% endif %}
+        </div>
+        <div>
+          {% if book.available_quantity > 0 %}
+          <form method="post" action="{{ url_for('user.borrow_book', book_id=book.id) }}">
+            <button class="btn tiny primary" type="submit">Borrow</button>
+          </form>
+          {% else %}
+          <span class="status unavailable">Unavailable</span>
+          {% endif %}
+        </div>
+      </div>
+      {% else %}
+      <p class="empty">No books found.</p>
+      {% endfor %}
+    </div>
+    {% if pagination.pages > 1 %}
+    <div class="pagination">
+      {% if pagination.has_prev %}<a class="page-link" href="{{ url_for('user.books', page=pagination.prev_num, q=request.args.get('q', '')) }}">Prev</a>{% endif %}
+      <span class="current">Page {{ pagination.page }} of {{ pagination.pages }}</span>
+      {% if pagination.has_next %}<a class="page-link" href="{{ url_for('user.books', page=pagination.next_num, q=request.args.get('q', '')) }}">Next</a>{% endif %}
+    </div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

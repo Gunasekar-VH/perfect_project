@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div>
+    <span class="eyebrow">College Library Management</span>
+    <h1>Manage books, borrowing, and student access in one clean dashboard.</h1>
+    <p class="lead">
+      A modern Flask and SQLite library system with role-based access for Admin and User,
+      automatic availability tracking, searchable inventory, overdue visibility, and a friendly interface.
+    </p>
+    <div class="hero-actions">
+      <a class="btn primary" href="{{ url_for('auth.login') }}">Login</a>
+      <a class="btn secondary" href="{{ url_for('auth.register') }}">Register</a>
+    </div>
+  </div>
+  <div class="hero-panel">
+    <div class="mini-stat"><span>Two roles</span><strong>Admin and User</strong></div>
+    <div class="mini-stat"><span>Inventory</span><strong>Borrow, return, and track availability</strong></div>
+    <div class="mini-stat"><span>Reports</span><strong>Overdue, returned, and borrowed summaries</strong></div>
+  </div>
+</section>
+
+<section class="section card-grid">
+  <div class="card"><strong>Login and registration</strong><p class="lead">Secure access with role-based routing.</p></div>
+  <div class="card"><strong>Search and filters</strong><p class="lead">Search by title, author, category, and ISBN.</p></div>
+  <div class="card"><strong>Borrowing history</strong><p class="lead">View returned, borrowed, and overdue records.</p></div>
+  <div class="card"><strong>Optional dark mode</strong><p class="lead">Switch themes with a persistent toggle.</p></div>
+</section>
+{% endblock %}

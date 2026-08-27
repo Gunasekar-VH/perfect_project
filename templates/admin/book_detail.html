@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="layout">
+  <aside class="sidebar">
+    <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('admin.books') }}">Books</a>
+    <a href="{{ url_for('admin.add_book') }}">Add Book</a>
+    <a href="{{ url_for('admin.borrowed_books') }}">Borrowed</a>
+    <a href="{{ url_for('admin.users') }}">Users</a>
+    <a href="{{ url_for('admin.reports') }}">Reports</a>
+  </aside>
+  <section class="content-area">
+    <div class="section-head">
+      <h2>{{ book.title }}</h2>
+      <a class="btn secondary" href="{{ url_for('admin.edit_book', book_id=book.id) }}">Edit book</a>
+    </div>
+    <div class="details-grid">
+      <div class="card">
+        <div class="detail-item"><span>Author</span><strong>{{ book.author }}</strong></div>
+        <div class="detail-item"><span>Category</span><strong>{{ book.category }}</strong></div>
+        <div class="detail-item"><span>ISBN</span><strong>{{ book.isbn }}</strong></div>
+        <div class="detail-item"><span>Total copies</span><strong>{{ book.quantity }}</strong></div>
+        <div class="detail-item"><span>Available</span><strong>{{ book.available_quantity }}</strong></div>
+      </div>
+      <div class="card">
+        <h3>Borrowing history</h3>
+        {% for borrowing in borrowings %}
+        <div class="detail-item">
+          <span>{{ borrowing.user.name }}</span>
+          <span class="status {{ status_for_borrowing(borrowing)|lower }}">{{ status_for_borrowing(borrowing) }}</span>
+        </div>
+        {% else %}
+        <p class="empty">No borrowing history for this book.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="panel form-card" style="max-width: 560px; margin: 0 auto;">
+  <h2>Login</h2>
+  <form method="post" class="stack-form">
+    <input name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button class="btn primary" type="submit">Login</button>
+  </form>
+  <p class="lead" style="margin-top: 12px;">Admin demo: <strong>admin / admin123</strong></p>
+</section>
+{% endblock %}

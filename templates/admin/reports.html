@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="layout">
+  <aside class="sidebar">
+    <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('admin.books') }}">Books</a>
+    <a href="{{ url_for('admin.add_book') }}">Add Book</a>
+    <a href="{{ url_for('admin.borrowed_books') }}">Borrowed</a>
+    <a href="{{ url_for('admin.users') }}">Users</a>
+    <a class="active" href="{{ url_for('admin.reports') }}">Reports</a>
+  </aside>
+  <section class="content-area">
+    <div class="section-head">
+      <h2>Reports</h2>
+    </div>
+    <div class="stats">
+      <div class="card stat"><span>Total books</span><strong>{{ total_books }}</strong></div>
+      <div class="card stat"><span>Total users</span><strong>{{ total_users }}</strong></div>
+      <div class="card stat"><span>Borrowed</span><strong>{{ borrowed }}</strong></div>
+      <div class="card stat"><span>Returned</span><strong>{{ returned }}</strong></div>
+      <div class="card stat"><span>Overdue</span><strong>{{ overdue }}</strong></div>
+    </div>
+  </section>
+</div>
+{% endblock %}

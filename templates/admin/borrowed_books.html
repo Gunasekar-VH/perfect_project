@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="layout">
+  <aside class="sidebar">
+    <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('admin.books') }}">Books</a>
+    <a href="{{ url_for('admin.add_book') }}">Add Book</a>
+    <a class="active" href="{{ url_for('admin.borrowed_books') }}">Borrowed</a>
+    <a href="{{ url_for('admin.users') }}">Users</a>
+    <a href="{{ url_for('admin.reports') }}">Reports</a>
+  </aside>
+  <section class="content-area">
+    <div class="section-head">
+      <h2>Borrowing Records</h2>
+    </div>
+    <div class="table">
+      <div class="table-head">
+        <div>ID</div><div>User</div><div>Book</div><div>Borrowed</div><div>Due</div><div>Status</div>
+      </div>
+      {% for borrowing in borrowings %}
+      <div class="row">
+        <div>{{ borrowing.id }}</div>
+        <div>{{ borrowing.user.name }}</div>
+        <div>{{ borrowing.book.title }}</div>
+        <div>{{ borrowing.borrow_date.strftime('%Y-%m-%d') }}</div>
+        <div>{{ borrowing.due_date.strftime('%Y-%m-%d') }}</div>
+        <div><span class="status {{ status_for_borrowing(borrowing)|lower }}">{{ status_for_borrowing(borrowing) }}</span></div>
+      </div>
+      {% else %}
+      <p class="empty">No borrowing records yet.</p>
+      {% endfor %}
+    </div>
+    {% if pagination.pages > 1 %}
+    <div class="pagination">
+      {% if pagination.has_prev %}<a class="page-link" href="{{ url_for('admin.borrowed_books', page=pagination.prev_num) }}">Prev</a>{% endif %}
+      <span class="current">Page {{ pagination.page }} of {{ pagination.pages }}</span>
+      {% if pagination.has_next %}<a class="page-link" href="{{ url_for('admin.borrowed_books', page=pagination.next_num) }}">Next</a>{% endif %}
+    </div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

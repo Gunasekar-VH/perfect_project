@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="layout">
+  <aside class="sidebar">
+    <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+    <a class="active" href="{{ url_for('admin.add_book') }}">Add Book</a>
+    <a href="{{ url_for('admin.books') }}">Books</a>
+    <a href="{{ url_for('admin.borrowed_books') }}">Borrowed</a>
+    <a href="{{ url_for('admin.users') }}">Users</a>
+    <a href="{{ url_for('admin.reports') }}">Reports</a>
+  </aside>
+  <section class="content-area">
+    <div class="section-head">
+      <h2>Add Book</h2>
+      <a class="btn secondary" href="{{ url_for('admin.books') }}">Back to books</a>
+    </div>
+    <form method="post" class="stack-form">
+      <input name="title" placeholder="Book title" required>
+      <input name="author" placeholder="Author" required>
+      <input name="isbn" placeholder="ISBN" required>
+      <input name="category" placeholder="Category" required>
+      <input type="number" min="1" name="quantity" placeholder="Quantity" required>
+      <button class="btn primary" type="submit">Add Book</button>
+    </form>
+  </section>
+</div>
+{% endblock %}
