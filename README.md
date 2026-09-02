@@ -1,82 +1,65 @@
-# Library Management System
+# 📚 Library Management System
 
-A beginner-friendly multi-page library management system built with Flask, SQLite, SQLAlchemy, HTML, CSS, and vanilla JavaScript.
+A beginner-friendly **Library Management System** developed using **Python Flask, SQLite, SQLAlchemy, HTML, CSS, and JavaScript**.
 
-## Requirements
+The application helps manage books, users, borrowing, returning, and book availability through a simple web interface.
 
-- Python 3.10+
-- pip
+## 🌐 Live Application
 
-## Installation
+🚀 **[Open Library Management System](https://perfect-project.onrender.com)**
 
-1. Create and activate a virtual environment.
-2. Install dependencies.
-3. Run the app with `python app.py`.
+## ✨ Features
 
-## Virtual Environment Setup
+- 📚 View available books
+- ➕ Add new books
+- 🔍 Search and manage books
+- 📖 Borrow books
+- ↩️ Return books
+- ✅ Track book availability
+- 💾 SQLite database
+- 🗄️ SQLAlchemy database management
+- 🌐 Flask-based web application
+- 🎨 HTML & CSS user interface
+- ⚡ JavaScript functionality
 
-```bash
-python -m venv venv
-venv\Scripts\activate
-```
+## 🛠️ Technologies Used
 
-## Package Installation
+| Technology | Purpose |
+|------------|---------|
+| Python | Backend programming |
+| Flask | Web framework |
+| SQLite | Database |
+| SQLAlchemy | Database management |
+| HTML | Web page structure |
+| CSS | Styling |
+| JavaScript | Frontend functionality |
+| Gunicorn | Production server |
+| Render | Cloud deployment |
 
-```bash
-pip install -r requirements.txt
-```
-
-## Database Initialization
-
-The SQLite database is created automatically the first time you run the app.
-
-## Run the Application
-
-```bash
-python app.py
-```
-
-Then open:
-
-```text
-http://127.0.0.1:5000
-```
-
-## Admin Login
-
-- Username: `admin`
-- Password: `admin123`
-
-## User Registration
-
-Go to the Register page and create an account with:
-
-- Name
-- Username
-- Email
-- Password
-
-## Project Structure
+## 📂 Project Structure
 
 ```text
-library-management-system/
+perfect_project/
+│
 ├── app.py
-├── database.db
 ├── requirements.txt
+├── render.yaml
 ├── README.md
+├── .gitignore
+│
 ├── models/
-│   └── models.py
+│   └── ...
+│
 ├── routes/
-│   ├── auth.py
-│   ├── admin.py
-│   └── user.py
+│   └── ...
+│
+├── static/
+│   ├── css/
+│   ├── js/
+│   └── ...
+│
 ├── templates/
-│   ├── index.html
-│   ├── login.html
-│   ├── register.html
-│   ├── admin/
-│   └── user/
-└── static/
-    ├── css/style.css
-    └── js/script.js
-```
+│   └── ...
+│
+└── .github/
+    └── workflows/
